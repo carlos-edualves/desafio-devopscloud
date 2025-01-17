@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: desafio-devops-cloud-conversao-distancia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: desafio-devops-cloud-conversao-distancia
+  template:
+    metadata:
+      labels:
+        app: desafio-devops-cloud-conversao-distancia
+    spec:
+        containers:
+        - name: desafio-devops-cloud-conversao-distancia  
+          image: carlose5700/desafio-devops-cloud:latest
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: desafio-devops-cloud-conversao-distancia
+spec:
+  selector:
+    app: desafio-devops-cloud-conversao-distancia
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
