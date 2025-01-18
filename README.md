@@ -16,7 +16,7 @@
 **Desafio K8S**<img align="center" alt="Bash" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg">
 </div> 
 
-[Arquivo deployment conversao de distancia](deployment.yaml)
+[Arquivo deployment conversao de distancia](deployment-conversao-distancia.yaml)
 
 
 
@@ -24,5 +24,9 @@
 
 ### desafio 2
 
+<div style="display: inline_block"><br>
 
+**Desafio aws - eks** <img align="center" alt="Bash" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg">
+</div>
 
+[Arquivo deployment fake shop](deployment-fake-shop.yaml)
