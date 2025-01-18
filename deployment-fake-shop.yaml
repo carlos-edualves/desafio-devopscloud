@@ -1,0 +1,89 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: desafio-devops-cloud-fake-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: desafio-devops-cloud-fake-shop
+  template:
+    metadata:
+      labels:
+        app: desafio-devops-cloud-fake-shop
+    spec:
+      containers:
+        - name: desafio-devops-cloud-fake-shop
+          image: carlose5700/fake-shop:v2
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: fake-shop-db
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: "ecommerce"
+            - name: DB_PASSWORD
+              value: "Pg1234"
+            - name: DB_NAME
+              value: "ecommerce"
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: desafio-devops-cloud-fake-shop
+spec:
+  selector:
+    app: desafio-devops-cloud-fake-shop
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fake-shop-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fake-shop-db
+  template:
+    metadata:
+      labels:
+        app: fake-shop-db
+    spec:
+      containers:
+        - name: fake-shop-db
+          image: postgres:13.16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "Pg1234"
+            - name: POSTGRES_USER
+              value: "ecommerce"
+            - name: POSTGRES_DB
+              value: "ecommerce"
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: fake-shop-db
+spec:
+  selector:
+    app: fake-shop-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
